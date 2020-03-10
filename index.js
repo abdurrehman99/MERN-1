@@ -5,7 +5,8 @@ const expressip = require('express-ip');
 const Users = require('./Users');
 
 const PORT = 5000 || process.env.PORT  ;
-const dbURL = 'mongodb://localhost/XORD' ;
+// const dbURL = 'mongodb://localhost/XORD' ;
+const dbURL = 'mongodb+srv://syedebad:ebad123@cluster0-xt32z.mongodb.net/XORD?retryWrites=true&w=majority';
 
 //Init app
 const app = express();
@@ -19,11 +20,11 @@ app.use(expressip().getIpInfoMiddleware);
 app.use(bodyParser.json());
 
 // Index Route
-app.get('/',(req,res)=> {
-    res.send('<h2>Hello from node server</h2>');
-})
+// app.get('/',(req,res)=> {
+//     res.send('<h2>Hello from node server</h2>');
+// })
 
-app.get('/getIP',(req,res)=>{
+app.get('/',(req,res)=>{
 
     Users.findOne({ ip : req.ipInfo.ip })
     .then( result=>{
@@ -31,7 +32,7 @@ app.get('/getIP',(req,res)=>{
             Users.findOneAndUpdate({ ip : req.ipInfo.ip },{ $inc:{ count:1 } })
             .then(r=>{
                 console.log(r);
-                res.json(r);
+                res.status(200).send(`<div>Your IP : ${r.ip}<br>Count : ${r.count}</div>`);
             })
             .catch(err=>{
                 console.log(err)
@@ -46,7 +47,7 @@ app.get('/getIP',(req,res)=>{
             newUser.save()
             .then( r=>{
                 console.log(r);
-                res.json(r);
+                res.status(200).send(`<div>Your IP : ${r.ip}<br>Count : ${r.count}</div>`);
             })
             .catch( err=>{
                 console.log(err);
