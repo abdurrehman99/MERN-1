@@ -20,11 +20,12 @@ app.use(expressip().getIpInfoMiddleware);
 app.use(bodyParser.json());
 
 // Index Route
-// app.get('/',(req,res)=> {
-//     res.send('<h2>Hello from node server</h2>');
-// })
+app.get('/',(req,res)=> {
+    res.send('<h2>Hello from node server</h2>');
+})
 
-app.get('/',(req,res)=>{
+//Get client IP
+app.get('/getip',(req,res)=>{
 
     Users.findOne({ ip : req.ipInfo.ip })
     .then( result=>{
