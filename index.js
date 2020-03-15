@@ -6,7 +6,7 @@ const Users = require('./Users');
 
 const PORT = process.env.PORT || 5000 ;
 // const dbURL = 'mongodb://localhost/XORD' ;
-const dbURL = 'mongodb+srv://syedebad:ebad123@cluster0-xt32z.mongodb.net/XORD?retryWrites=true&w=majority';
+const dbURL = 'mongodb+srv://syedebad:IXraoFyJXbhWUlYs@cluster0-xt32z.mongodb.net/XORD?retryWrites=true&w=majority';
 
 //Init app
 const app = express();
