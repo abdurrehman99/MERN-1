@@ -19,13 +19,8 @@ app.use(bodyParser.urlencoded({
 app.use(expressip().getIpInfoMiddleware);
 app.use(bodyParser.json());
 
-// Index Route
-app.get('/',(req,res)=> {
-    res.send('<h2>Hello from node server</h2>');
-})
-
 //Get client IP
-app.get('/getip',(req,res)=>{
+app.get('/',(req,res)=>{
 
     Users.findOne({ ip : req.ipInfo.ip })
     .then( result=>{
@@ -33,7 +28,7 @@ app.get('/getip',(req,res)=>{
             Users.findOneAndUpdate({ ip : req.ipInfo.ip },{ $inc:{ count:1 } })
             .then(r=>{
                 console.log(r);
-                res.status(200).send(`<div>Your IP : ${r.ip}<br>Count : ${r.count}</div>`);
+                res.status(200).send(`<div><h2>Hello from node server</h2>Your IP : ${r.ip}<br>Count : ${r.count}</div>`);
             })
             .catch(err=>{
                 console.log(err)
@@ -48,7 +43,7 @@ app.get('/getip',(req,res)=>{
             newUser.save()
             .then( r=>{
                 console.log(r);
-                res.status(200).send(`<div>Your IP : ${r.ip}<br>Count : ${r.count}</div>`);
+                res.status(200).send(`<div<h2>Hello from node server</h2>>Your IP : ${r.ip}<br>Count : ${r.count}</div<h2>`);
             })
             .catch( err=>{
                 console.log(err);
